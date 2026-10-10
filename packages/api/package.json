@@ -16,6 +16,7 @@
     "@orpc/zod": "catalog:",
     "@pedia/auth": "workspace:*",
     "@pedia/db": "workspace:*",
+    "@pedia/shared": "workspace:*",
     "zod": "catalog:"
   },
   "devDependencies": {

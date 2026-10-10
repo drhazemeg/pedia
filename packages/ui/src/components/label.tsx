@@ -1,19 +1,40 @@
-"use client";
-
 import { cn } from "@pedia/ui/lib/utils";
-import * as React from "react";
+import type * as React from "react";
 
-function Label({ className, ...props }: React.ComponentProps<"label">) {
+type LabelProps = React.ComponentProps<"label"> & {
+  /** Render a decorative asterisk after the label text. */
+  required?: boolean;
+};
+
+function Label({
+  className,
+  htmlFor,
+  required,
+  children,
+  ...props
+}: LabelProps) {
   return (
     <label
-      data-slot="label"
       className={cn(
-        "flex items-center gap-2 text-xs leading-none select-none group-data-[disabled=true]:pointer-events-none group-data-[disabled=true]:opacity-50 peer-disabled:cursor-not-allowed peer-disabled:opacity-50",
-        className,
+        "inline-flex items-center gap-2 text-sm leading-none font-medium select-none",
+        "group-data-[disabled=true]:pointer-events-none group-data-[disabled=true]:opacity-50",
+        "peer-disabled:cursor-not-allowed peer-disabled:opacity-50",
+        className
       )}
+      data-required={required ?? undefined}
+      data-slot="label"
+      htmlFor={htmlFor}
       {...props}
-    />
+    >
+      {children}
+      {required && (
+        <span aria-hidden className="text-destructive">
+          *
+        </span>
+      )}
+    </label>
   );
 }
 
+export type { LabelProps };
 export { Label };

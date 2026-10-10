@@ -1,0 +1,18 @@
+{
+  "extends": "@pedia/config/tsconfig.base.json",
+  "compilerOptions": {
+    "composite": true,
+    "declaration": true,
+    "declarationMap": true,
+    "emitDeclarationOnly": true,
+    "incremental": true,
+    "rootDir": "src",
+    "lib": ["ES2024", "DOM", "DOM.Iterable"],
+    "paths": {
+      "@pedia/shared/*": ["./src/*"]
+    },
+    "types": ["bun"]
+  },
+  "include": ["src/**/*.ts"],
+  "exclude": ["node_modules", "dist"]
+}

@@ -19,7 +19,7 @@
     "@pedia/auth": "workspace:*",
     "@pedia/db": "workspace:*",
     "better-auth": "catalog:",
-    "hono": "^4.13.7",
+    "hono": "^4.13.13",
     "varlock": "catalog:",
     "zod": "catalog:"
   },

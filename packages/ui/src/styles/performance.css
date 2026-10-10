@@ -1,0 +1,93 @@
+/* ============================================================================
+   PERFORMANCE — Reduced motion, GPU, containment, mobile optimizations
+   ============================================================================ */
+
+/* ============================
+   REDUCED MOTION (canonical — was duplicated)
+   ============================ */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms;
+    animation-duration: 0.01ms;
+    animation-iteration-count: 1;
+  }
+
+  .animate-shimmer {
+    background: var(--muted);
+    animation: none;
+  }
+}
+
+/* ============================
+   GPU ACCELERATION
+   ============================ */
+
+.gpu-accelerated {
+  transform: translateZ(0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+/* ============================
+   CONTAINMENT
+   ============================ */
+
+.contain-layout {
+  contain: layout;
+}
+.contain-style {
+  contain: style;
+}
+.contain-paint {
+  contain: paint;
+}
+.contain-layout-style {
+  contain: layout style;
+}
+.contain-layout-paint {
+  contain: layout paint;
+}
+.contain-all {
+  contain: layout style paint;
+}
+
+/* ============================
+   WILL-CHANGE
+   ============================ */
+
+.will-change-transform {
+  will-change: transform;
+}
+.will-change-opacity {
+  will-change: opacity;
+}
+.will-change-scroll {
+  will-change: scroll-position;
+}
+
+/* ============================
+   COMPOSITE / PAINT
+   ============================ */
+
+.paint-optimized {
+  contain: layout style paint;
+}
+.composite-optimized {
+  will-change: transform, opacity;
+}
+
+/* ============================
+   MOBILE COMPLEXITY REDUCTION
+   ============================ */
+
+@media (max-width: 640px) {
+  .glass,
+  .glass-dark,
+  .island-shell {
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+}

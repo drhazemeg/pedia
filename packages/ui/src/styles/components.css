@@ -1,0 +1,215 @@
+/* ============================================================================
+   COMPONENTS — Reusable component classes
+   ============================================================================ */
+
+/* ============================
+   LAYOUT
+   ============================ */
+
+.page-wrap {
+  width: min(1080px, calc(100% - 2rem));
+  margin-inline: auto;
+  contain: layout style;
+}
+
+/* ============================
+   CARDS / ISLANDS
+   ============================ */
+
+.island-shell {
+  contain: layout style;
+  background: linear-gradient(165deg, var(--surface-strong), var(--surface));
+  border: 1px solid var(--line);
+  box-shadow:
+    0 1px 0 var(--inset-glint) inset,
+    var(--shadow-xl),
+    var(--shadow-md);
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+  will-change: transform;
+}
+
+.feature-card {
+  contain: layout style;
+  background: linear-gradient(
+    165deg,
+    color-mix(in oklab, var(--surface-strong) 93%, white 7%),
+    var(--surface)
+  );
+  border: 1px solid var(--line);
+  box-shadow:
+    0 1px 0 var(--inset-glint) inset,
+    var(--shadow-lg),
+    var(--shadow-sm);
+  transition:
+    transform 250ms cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 250ms ease,
+    box-shadow 250ms ease;
+  will-change: transform;
+}
+
+.feature-card:hover {
+  border-color: color-mix(
+    in oklab,
+    var(--color-brand-accent-deep) 35%,
+    var(--line)
+  );
+  box-shadow:
+    0 1px 0 var(--inset-glint) inset,
+    var(--shadow-xl),
+    var(--shadow-md);
+  transform: translateY(-4px);
+}
+
+/* ============================
+   NAVIGATION
+   ============================ */
+
+.nav-link {
+  position: relative;
+  color: var(--color-brand-primary-soft);
+  text-decoration: none;
+  transition: color 180ms ease;
+}
+
+.nav-link::after {
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  content: "";
+  background: linear-gradient(90deg, var(--color-brand-accent), #7ed3bf);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 250ms cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+
+.nav-link:hover,
+.nav-link.is-active {
+  color: var(--color-brand-primary);
+}
+
+.nav-link:hover::after,
+.nav-link.is-active::after {
+  transform: scaleX(1);
+}
+
+/* ============================
+   GLASS / BLUR
+   ============================ */
+
+.glass {
+  background: var(--surface-strong);
+  border: 1px solid var(--line);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+}
+
+.glass-dark {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+}
+
+/* ============================
+   CHIPS / BADGES
+   ============================ */
+
+.chip {
+  display: inline-flex;
+  gap: 0.25rem;
+  align-items: center;
+  padding: 0.25rem 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  background: var(--chip-bg);
+  border: 1px solid var(--chip-line);
+  border-radius: 9999px;
+}
+
+.chip-primary {
+  color: var(--primary-foreground);
+  background: var(--primary);
+  border-color: var(--primary);
+}
+
+.chip-success {
+  color: white;
+  background: var(--color-brand-success);
+  border-color: var(--color-brand-success);
+}
+
+/* ============================
+   KICKER / LABEL
+   ============================ */
+
+.kicker {
+  font-size: 0.69rem;
+  font-weight: 700;
+  font-feature-settings: "calt" 0;
+  color: var(--kicker);
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+}
+
+/* ============================
+   BUTTONS
+   ============================ */
+
+.btn-ghost {
+  color: var(--foreground);
+  background: transparent;
+  border: 1px solid var(--line);
+  transition: all 180ms ease;
+}
+
+.btn-ghost:hover {
+  background: var(--surface-hover);
+  border-color: var(--line-strong);
+}
+
+.btn-primary {
+  color: var(--primary-foreground);
+  background: var(--primary);
+  border: 1px solid var(--primary);
+  transition: all 180ms ease;
+}
+
+.btn-primary:hover {
+  opacity: 0.85;
+}
+
+/* ============================
+   FOOTER
+   ============================ */
+
+.site-footer {
+  contain: layout style;
+  background: color-mix(in oklab, var(--header-bg) 84%, transparent 16%);
+  border-top: 1px solid var(--line);
+}
+
+/* ============================
+   SMALL HELPERS
+   ============================ */
+
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.text-balance {
+  text-wrap: balance;
+}
+
+.no-select {
+  -webkit-user-select: none;
+  user-select: none;
+}

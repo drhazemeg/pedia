@@ -1,0 +1,126 @@
+/* ============================================================================
+   BASE — html, body, selection, print, dark behavior
+   ============================================================================ */
+
+@layer base {
+  html {
+    min-height: 100%;
+    background-color: var(--bg-base);
+  }
+
+  body {
+    min-height: 100vh;
+    contain: layout paint;
+    overflow-x: hidden;
+    font-family: var(--font-sans);
+    color: var(--foreground);
+    background-color: var(--bg-base);
+    background-image:
+      radial-gradient(1100px 620px at -8% -10%, var(--hero-a), transparent 58%),
+      radial-gradient(
+        1050px 620px at 112% -12%,
+        var(--hero-b),
+        transparent 62%
+      ),
+      radial-gradient(
+        720px 380px at 50% 115%,
+        rgba(79, 184, 178, 0.1),
+        transparent 68%
+      );
+  }
+
+  ::selection {
+    color: var(--foreground);
+    background: color-mix(
+      in oklab,
+      var(--color-brand-accent) 30%,
+      var(--color-brand-primary) 10%
+    );
+  }
+}
+
+/* ============================
+   LIGHT MODE (opt-in)
+   ============================ */
+
+.light {
+  color-scheme: light;
+}
+
+/* ============================
+   DARK BEHAVIOR (variable overrides live in theme.css)
+   ============================ */
+
+@layer base {
+  .dark code {
+    background: color-mix(in oklab, var(--surface-strong) 82%, black 18%);
+    border-color: var(--line);
+  }
+
+  .dark ::selection {
+    color: var(--foreground);
+    background: color-mix(
+      in oklab,
+      var(--color-brand-accent) 20%,
+      var(--color-brand-primary) 10%
+    );
+  }
+
+  /* Dark-mode shadows for components */
+  .dark .island-shell {
+    box-shadow:
+      0 1px 0 var(--inset-glint) inset,
+      var(--shadow-lg);
+  }
+
+  .dark .feature-card {
+    box-shadow:
+      0 1px 0 var(--inset-glint) inset,
+      var(--shadow-md);
+  }
+
+  .dark .feature-card:hover {
+    box-shadow:
+      0 1px 0 var(--inset-glint) inset,
+      var(--shadow-xl),
+      var(--shadow-md);
+  }
+
+  /* Glass overrides (formerly in utilities.css) */
+  .dark .glass {
+    background: var(--surface);
+    border-color: var(--line);
+  }
+
+  .dark .glass-dark {
+    background: var(--surface-strong);
+    border-color: var(--line-strong);
+  }
+}
+
+/* ============================
+   PRINT
+   ============================ */
+
+@media print {
+  body {
+    color: black;
+    background: white;
+  }
+
+  .site-footer,
+  .nav-link::after {
+    display: none;
+  }
+
+  .island-shell {
+    border: 1px solid #ddd;
+    box-shadow: none;
+    backdrop-filter: none;
+  }
+
+  .feature-card {
+    box-shadow: none;
+    break-inside: avoid;
+  }
+}

@@ -247,29 +247,29 @@ c.req.raw; // underlying Request object
 ### Using Built-in Middleware
 
 ```ts
-import { cors } from "hono/cors";
-import { logger } from "hono/logger";
 import { basicAuth } from "hono/basic-auth";
-import { prettyJSON } from "hono/pretty-json";
-import { secureHeaders } from "hono/secure-headers";
-import { etag } from "hono/etag";
-import { compress } from "hono/compress";
-import { poweredBy } from "hono/powered-by";
-import { timing } from "hono/timing";
-import { cache } from "hono/cache";
 import { bearerAuth } from "hono/bearer-auth";
-import { jwt } from "hono/jwt";
-import { jwk } from "hono/jwk";
-import { csrf } from "hono/csrf";
-import { ipRestriction } from "hono/ip-restriction";
 import { bodyLimit } from "hono/body-limit";
-import { timeout } from "hono/timeout";
-import { requestId } from "hono/request-id";
-import { methodOverride } from "hono/method-override";
-import { methodNotAllowed } from "hono/method-not-allowed";
-import { languageDetector } from "hono/language";
+import { cache } from "hono/cache";
 import { some, every, except } from "hono/combine";
+import { compress } from "hono/compress";
 import { contextStorage, getContext } from "hono/context-storage";
+import { cors } from "hono/cors";
+import { csrf } from "hono/csrf";
+import { etag } from "hono/etag";
+import { ipRestriction } from "hono/ip-restriction";
+import { jwk } from "hono/jwk";
+import { jwt } from "hono/jwt";
+import { languageDetector } from "hono/language";
+import { logger } from "hono/logger";
+import { methodNotAllowed } from "hono/method-not-allowed";
+import { methodOverride } from "hono/method-override";
+import { poweredBy } from "hono/powered-by";
+import { prettyJSON } from "hono/pretty-json";
+import { requestId } from "hono/request-id";
+import { secureHeaders } from "hono/secure-headers";
+import { timeout } from "hono/timeout";
+import { timing } from "hono/timing";
 import { trailingSlash, trimTrailingSlash } from "hono/trailing-slash";
 
 // Registration
@@ -401,7 +401,7 @@ app.get("/", (c) => {
   return c.html(
     <Layout>
       <UserCard name="Alice" />
-    </Layout>,
+    </Layout>
   );
 });
 ```
@@ -502,7 +502,11 @@ formData.append("name", "Alice");
 const res = await app.request("/users", { method: "POST", body: formData });
 
 // With mock env (Cloudflare Workers bindings)
-const res = await app.request("/api/data", {}, { KV: mockKV, DATABASE: mockDB });
+const res = await app.request(
+  "/api/data",
+  {},
+  { KV: mockKV, DATABASE: mockDB }
+);
 
 // Using Request object
 const req = new Request("http://localhost/api", { method: "DELETE" });
@@ -530,6 +534,7 @@ export type AppType = typeof route;
 
 // Client: use hc() with the exported type
 import { hc } from "hono/client";
+
 import type { AppType } from "./server";
 
 const client = hc<AppType>("http://localhost:8787/");
@@ -553,6 +558,7 @@ type ResType = InferResponseType<typeof client.posts.$post, 200>;
 Helpers are utility functions imported from `hono/<helper-name>`:
 
 ```ts
+import { upgradeWebSocket } from "@hono/cloudflare-workers"; // or another @hono/<runtime> adapter package
 import { getConnInfo } from "hono/conninfo";
 import { getCookie, setCookie, deleteCookie } from "hono/cookie";
 import { css, Style } from "hono/css";
@@ -560,7 +566,6 @@ import { createFactory } from "hono/factory";
 import { html, raw } from "hono/html";
 import { stream, streamText, streamSSE } from "hono/streaming";
 import { testClient } from "hono/testing";
-import { upgradeWebSocket } from "@hono/cloudflare-workers"; // or another @hono/<runtime> adapter package
 ```
 
 Available helpers: Accepts, Adapter, ConnInfo, Cookie, css, Dev, Factory, html, JWT, Proxy, Route, SSG, Streaming, Testing, WebSocket.
@@ -585,7 +590,9 @@ const mw = factory.createMiddleware(async (c, next) => {
 });
 
 // Create handlers separately (preserves type inference)
-const handlers = factory.createHandlers(logger(), (c) => c.json({ message: "Hello" }));
+const handlers = factory.createHandlers(logger(), (c) =>
+  c.json({ message: "Hello" })
+);
 app.get("/api", ...handlers);
 ```
 

@@ -1,18 +1,18 @@
 "use client";
 
 import { Button } from "@pedia/ui/components/button";
-import { cn } from "@pedia/ui/lib/utils";
-import {
-  MessageScroller as MessageScrollerPrimitive,
+import { MessageScroller as MessageScrollerPrimitive } from "@shadcn/react/message-scroller";
+import { cn } from "cn";
+import { ArrowDownIcon } from "lucide-react";
+import type * as React from "react";
+export {
   useMessageScroller,
   useMessageScrollerScrollable,
   useMessageScrollerVisibility,
 } from "@shadcn/react/message-scroller";
-import { ArrowDownIcon } from "lucide-react";
-import * as React from "react";
 
 function MessageScrollerProvider(
-  props: React.ComponentProps<typeof MessageScrollerPrimitive.Provider>,
+  props: React.ComponentProps<typeof MessageScrollerPrimitive.Provider>
 ) {
   return <MessageScrollerPrimitive.Provider {...props} />;
 }
@@ -23,11 +23,11 @@ function MessageScroller({
 }: React.ComponentProps<typeof MessageScrollerPrimitive.Root>) {
   return (
     <MessageScrollerPrimitive.Root
-      data-slot="message-scroller"
       className={cn(
-        "cn-message-scroller group/message-scroller relative flex size-full min-h-0 flex-col overflow-hidden",
-        className,
+        "group/message-scroller relative flex size-full min-h-0 flex-col overflow-hidden",
+        className
       )}
+      data-slot="message-scroller"
       {...props}
     />
   );
@@ -39,11 +39,11 @@ function MessageScrollerViewport({
 }: React.ComponentProps<typeof MessageScrollerPrimitive.Viewport>) {
   return (
     <MessageScrollerPrimitive.Viewport
-      data-slot="message-scroller-viewport"
       className={cn(
-        "cn-message-scroller-viewport size-full min-h-0 min-w-0 scroll-fade-b scrollbar-thin scrollbar-gutter-stable overflow-y-auto overscroll-contain contain-content data-autoscrolling:scrollbar-none",
-        className,
+        "scroll-fade-b size-full min-h-0 min-w-0 scrollbar-thin scrollbar-gutter-stable overflow-y-auto overscroll-contain contain-content data-autoscrolling:scrollbar-thumb-transparent data-autoscrolling:scrollbar-track-transparent data-pending-scroll:invisible",
+        className
       )}
+      data-slot="message-scroller-viewport"
       {...props}
     />
   );
@@ -55,8 +55,8 @@ function MessageScrollerContent({
 }: React.ComponentProps<typeof MessageScrollerPrimitive.Content>) {
   return (
     <MessageScrollerPrimitive.Content
+      className={cn("flex h-max min-h-full flex-col gap-6", className)}
       data-slot="message-scroller-content"
-      className={cn("cn-message-scroller-content flex h-max min-h-full flex-col gap-6", className)}
       {...props}
     />
   );
@@ -69,12 +69,12 @@ function MessageScrollerItem({
 }: React.ComponentProps<typeof MessageScrollerPrimitive.Item>) {
   return (
     <MessageScrollerPrimitive.Item
+      className={cn(
+        "min-w-0 shrink-0 [contain-intrinsic-size:auto_10rem] [content-visibility:auto]",
+        className
+      )}
       data-slot="message-scroller-item"
       scrollAnchor={scrollAnchor}
-      className={cn(
-        "cn-message-scroller-item min-w-0 shrink-0 [contain-intrinsic-size:auto_10rem] [content-visibility:auto]",
-        className,
-      )}
       {...props}
     />
   );
@@ -92,16 +92,16 @@ function MessageScrollerButton({
   Pick<React.ComponentProps<typeof Button>, "variant" | "size">) {
   return (
     <MessageScrollerPrimitive.Button
-      data-slot="message-scroller-button"
-      data-direction={direction}
-      data-variant={variant}
-      data-size={size}
-      direction={direction}
       className={cn(
-        "cn-message-scroller-button absolute inset-s-1/2 -translate-x-1/2 border-border bg-background text-foreground transition-[translate,scale,opacity] duration-200 hover:bg-muted hover:text-foreground data-[active=false]:pointer-events-none data-[active=false]:scale-95 data-[active=false]:opacity-0 data-[active=false]:duration-400 data-[active=false]:ease-[cubic-bezier(0.7,0,0.84,0)] data-[active=true]:translate-y-0 data-[active=true]:scale-100 data-[active=true]:opacity-100 data-[active=true]:ease-[cubic-bezier(0.23,1,0.32,1)] data-[direction=end]:bottom-4 data-[direction=end]:data-[active=false]:translate-y-full data-[direction=start]:top-4 data-[direction=start]:data-[active=false]:-translate-y-full rtl:translate-x-1/2 data-[direction=start]:[&_svg]:rotate-180",
-        className,
+        "border-border bg-background text-foreground hover:bg-muted hover:text-foreground absolute inset-s-1/2 -translate-x-1/2 transition-[translate,scale,opacity] duration-200 data-[active=false]:pointer-events-none data-[active=false]:scale-95 data-[active=false]:opacity-0 data-[active=false]:duration-400 data-[active=false]:ease-[cubic-bezier(0.7,0,0.84,0)] data-[active=true]:translate-y-0 data-[active=true]:scale-100 data-[active=true]:opacity-100 data-[active=true]:ease-[cubic-bezier(0.23,1,0.32,1)] data-[direction=end]:bottom-4 data-[direction=end]:data-[active=false]:translate-y-full data-[direction=start]:top-4 data-[direction=start]:data-[active=false]:-translate-y-full rtl:translate-x-1/2 data-[direction=start]:[&_svg]:rotate-180",
+        className
       )}
-      render={render ?? <Button variant={variant} size={size} />}
+      data-direction={direction}
+      data-size={size}
+      data-slot="message-scroller-button"
+      data-variant={variant}
+      direction={direction}
+      render={render ?? <Button size={size} variant={variant} />}
       {...props}
     >
       {children ?? (
@@ -123,7 +123,4 @@ export {
   MessageScrollerContent,
   MessageScrollerItem,
   MessageScrollerButton,
-  useMessageScroller,
-  useMessageScrollerScrollable,
-  useMessageScrollerVisibility,
 };

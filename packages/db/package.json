@@ -3,26 +3,42 @@
   "type": "module",
   "exports": {
     ".": "./src/index.ts",
-    "./*": "./src/*.ts"
+    "./*": "./src/*.ts",
+    "./repositories": "./src/repositories/index.ts",
+    "./schema": "./src/schema/index.ts",
+    "./schema/*": "./src/schema/*.ts"
   },
   "scripts": {
     "build": "tsc -b",
+    "check": "oxlint --fix && oxfmt .",
     "check-types": "tsc -b",
-    "db:push": "drizzle-kit push",
+    "check:types": "tsc -b",
     "db:generate": "drizzle-kit generate",
+    "db:migrate": "drizzle-kit migrate",
     "db:migrate:deploy": "drizzle-kit migrate",
+    "db:push": "drizzle-kit push",
+    "db:seed": "bun run ./src/seed.ts",
     "db:studio": "drizzle-kit studio",
-    "db:migrate": "drizzle-kit migrate"
+    "format": "oxfmt .",
+    "format:check": "oxfmt --check .",
+    "lint": "oxlint",
+    "lint:fix": "oxlint --fix",
+    "ready": "oxlint --fix && oxfmt . && tsc -b"
   },
   "dependencies": {
+    "@faker-js/faker": "catalog:",
+    "@pedia/shared": "workspace:*",
+    "date-fns": "catalog:",
     "drizzle-orm": "catalog:",
-    "pg": "^8.23.0",
+    "pg": "^8.23.1",
     "zod": "catalog:"
   },
   "devDependencies": {
     "@pedia/config": "workspace:*",
-    "@types/pg": "^8.23.1",
-    "drizzle-kit": "1.0.0-rc.4",
+    "@types/pg": "catalog:",
+    "drizzle-kit": "catalog:",
+    "oxfmt": "catalog:",
+    "oxlint": "catalog:",
     "typescript": "catalog:",
     "varlock": "catalog:"
   }

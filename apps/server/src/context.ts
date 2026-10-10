@@ -1,14 +1,15 @@
 import type { Context as ApiContext } from "@pedia/api/context";
 import type { Context as HonoContext } from "hono";
 
-import { db } from "./services";
-import { auth } from "./services";
+import { db, auth } from "./services";
 
-export type CreateContextOptions = {
+export interface CreateContextOptions {
   context: HonoContext;
-};
+}
 
-export async function createContext({ context }: CreateContextOptions): Promise<ApiContext> {
+export async function createContext({
+  context,
+}: CreateContextOptions): Promise<ApiContext> {
   const session = await auth.api.getSession({
     headers: context.req.raw.headers,
   });

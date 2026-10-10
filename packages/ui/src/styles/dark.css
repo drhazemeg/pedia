@@ -1,0 +1,55 @@
+/* ============================================================================
+   DARK MODE - Specific Overrides
+   ============================================================================ */
+
+@layer base {
+  .dark {
+    color-scheme: dark;
+  }
+
+  /* Dark mode code */
+  .dark code {
+    background: color-mix(in oklab, var(--surface-strong) 82%, black 18%);
+    border-color: var(--line);
+  }
+
+  /* Dark mode selection */
+  .dark ::selection {
+    color: var(--foreground);
+    background: color-mix(
+      in oklab,
+      var(--color-brand-accent) 20%,
+      var(--color-brand-primary) 10%
+    );
+  }
+
+  .dark .island-shell {
+    box-shadow:
+      0 1px 0 var(--inset-glint) inset,
+      var(--shadow-lg);
+  }
+
+  .dark .feature-card {
+    box-shadow:
+      0 1px 0 var(--inset-glint) inset,
+      var(--shadow-md);
+  }
+
+  .dark .feature-card:hover {
+    box-shadow:
+      0 1px 0 var(--inset-glint) inset,
+      var(--shadow-xl),
+      var(--shadow-md);
+  }
+
+  /* Glass overrides (moved from utilities.css) */
+  .dark .glass {
+    background: var(--surface);
+    border-color: var(--line);
+  }
+
+  .dark .glass-dark {
+    background: var(--surface-strong);
+    border-color: var(--line-strong);
+  }
+}

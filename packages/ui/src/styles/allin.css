@@ -1,0 +1,43 @@
+/* ─── Tailwind core ─────────────────────────────────────────────────────
+ * All @imports must precede any non-@import rule (CSS spec + Biome).
+ */
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@import "./theme.css";
+@import "./typography.css";
+
+/* ─── Base + components + utilities ─────────────────────────────────── */
+@import "./base.css";
+@import "./components.css";
+@import "./animations.css";
+@import "./utilities.css";
+
+/* ─── Behavioral overrides ──────────────────────────────────────────── */
+@import "./scrollbar.css";
+@import "./performance.css";
+
+/* ─── Tailwind plugins ────────────────────────────────────────────────
+ * After all @imports — this is what Biome was complaining about.
+ */
+@plugin "@tailwindcss/typography";
+
+/* ─── Source scanning ─────────────────────────────────────────────────
+ * Scoped to the files that actually render UI. Excludes build artifacts.
+ */
+@source "../**/*.{ts,tsx}";
+@source "../../../apps/web/src/**/*.{ts,tsx}";
+
+@source not "../../**/node_modules";
+@source not "../../**/.nitro";
+@source not "../../**/.output";
+@source not "../../**/dist";
+@source not "../**/*.test.{ts,tsx}";
+@source not "../**/*.spec.{ts,tsx}";
+
+/* ─── Custom variants ─────────────────────────────────────────────────
+ * After @source — order is fine, they're independent of scanning.
+ */
+@custom-variant dark (&:is(.dark *));
+@custom-variant light (&:is(.light *));

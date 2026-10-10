@@ -1,0 +1,40 @@
+{
+  "name": "@pedia/shared",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "sideEffects": false,
+  "exports": {
+    ".": "./src/index.ts",
+    "./*": "./src/*.ts",
+    "./constants": "./src/constants/index.ts",
+    "./constants/*": "./src/constants/*.ts",
+    "./logger/*": "./src/logger/*.ts",
+    "./schemas": "./src/schemas/index.ts",
+    "./schemas/*": "./src/schemas/*.ts"
+  },
+  "scripts": {
+    "build": "tsc --noEmit --pretty",
+    "check": "biome check --write",
+    "check-types": "tsc --noEmit --pretty",
+    "clean": "rm -rf dist .tsbuildinfo",
+    "dev": "tsc --noEmit --pretty --watch --preserveWatchOutput"
+  },
+  "dependencies": {
+    "date-fns": "catalog:",
+    "limax": "4.2.3",
+    "pino": "10.4.0",
+    "react": "catalog:",
+    "react-dom": "catalog:",
+    "zod": "catalog:"
+  },
+  "devDependencies": {
+    "@pedia/config": "workspace:*",
+    "@types/bun": "catalog:",
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
+    "bumpp": "catalog:",
+    "pino-pretty": "13.2.0",
+    "typescript": "catalog:"
+  }
+}

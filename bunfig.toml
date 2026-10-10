@@ -1,1 +1,153 @@
 env = false
+# ==============================================================================
+# Optimized bunfig.toml for Local-First Monorepo Performance (Debian 13 / Bun)
+# ==============================================================================
+
+[install]
+linker = "isolated"
+logLevel = "error"
+smol = false
+telemetry = false
+exact = true
+saveTextLockfile = true
+
+# ── FIX 1: frozenLockfile = false in CI is a footgun. ──────────────────────
+# Set to true so CI never silently mutates bun.lock. Locally you can still
+# run `bun install` interactively to update it. If you truly need to opt out
+# in a specific CI job, do it via `BUN_FROZEN_LOCKFILE=0 bun install`.
+frozenLockfile = true
+
+# ── FIX 2: `auto` is not a valid value for `install.auto`. ─────────────────
+# Valid values are `"auto"`, `"force"`, `"fallback"`, `"disable"` — but
+# `"auto"` is only meaningful as a *fallback mode*. Without a `peerDependencies`
+# directive alongside it, it does nothing. Removed; add back if you enable
+# `peerDependencies = "auto"` too.
+# auto = "auto"
+
+[install.cache]
+dir = "/home/hazemali/.bun/install/cache"
+disable = false
+
+# ── FIX 3: `cache = "auto"` is not a valid key. Removed. ───────────────────
+# `[install.cache]` accepts `dir`, `disable`, and `disableManifest`. There is
+# no `cache` key. Having it here was a no-op that would silently be dropped.
+
+[install.lockfile]
+save = true
+
+[install.scopes]
+# ── FIX 4: These aliases are malformed. ────────────────────────────────────
+# `[install.scopes]` maps an *npm scope* (e.g. `@myorg`) to a registry URL,
+# NOT to another package name. The syntax you wrote is for `[overrides]`.
+# Also: `@typescript/typescript6` does not exist on npm — TS 6 ships as
+# `typescript@next` (or a versioned `typescript@6.0.0-beta`).
+#
+# If your intent was to override the `typescript` package resolution, use
+# `[overrides]` instead (see below).
+#
+# If your intent was to point a scope at a private registry, write:
+#   "@myorg" = "https://npm.pkg.github.com"
+#
+# Both original entries are removed — see the `[overrides]` block.
+
+# ── FIX 5: `[define]` is not a valid bunfig.toml table. ────────────────────
+# Bun does not read a `[define]` block from bunfig.toml. `global = globalThis`
+# is already the default in the Bun runtime. Worse, if Bun ever *does* honour
+# a `[define]` key in the future, `"global" = "globalThis"` would rewrite
+# every literal identifier `global` in your source — which in a TanStack Start
+# SSR app means your server/client branches collapse to `globalThis` and the
+# `createIsomorphicFn` in `src/utils/orpc.ts` breaks silently.
+#
+# If you want Bun-level defines, use `bun build --define` or Vite's
+# `define` option in `vite.config.ts`. Removed entirely.
+
+# ── FIX 6: JSX config belongs under `[jsx]`, not top-level. ────────────────
+# Top-level `jsx = ...` and `jsxImportSource = ...` were being read as
+# unknown keys and dropped. Bun expects them nested:
+[jsx]
+runtime = "automatic"
+importSource = "react"
+
+# ==============================================================================
+# Asset Loaders
+# ==============================================================================
+
+# ── FIX 7: `[loader]` maps *extensions* to *loaders*, but `"text"` is not
+#    a valid loader name and `.css` should be `"css"`, not `"text"`. Also,
+#    `bun build`/`bun run` does NOT read `[loader]` from bunfig.toml for
+#    bundling — that is a `Bun.build({ loader })` option. What bunfig.toml
+#    *does* support is the `[loader]` table for `bun run ./file.ext` direct
+#    execution, and the valid loader values are documented here:
+#    https://bun.sh/docs/runtime/loaders
+#
+#    Valid names: "js", "jsx", "ts", "tsx", "css", "json", "json5",
+#    "toml", "yaml", "text", "file", "napi", "wasm", "sqlite", "html".
+#
+#    Your entries are *almost* right — `".css" = "css"` is more correct than
+#    `"text"` so downstream tooling sees CSS as CSS. Kept as `"css"`.
+[loader]
+".css" = "css"
+".module.css" = "css"
+".svg" = "file"
+".png" = "file"
+".jpg" = "file"
+".jpeg" = "file"
+".gif" = "file"
+".webp" = "file"
+".woff" = "file"
+".woff2" = "file"
+".ttf" = "file"
+".otf" = "file"
+
+# ==============================================================================
+# Node.js Compatibility Layer
+# ==============================================================================
+
+[node]
+# ── FIX 8: `compat = true` is not a valid key under `[node]`. ──────────────
+# The valid `[node]` keys in bunfig.toml are:
+#   `disable`    — disable Node.js compatibility layer entirely
+#   `moduleResolution` — "bundler" | "node"
+#   `modulesDir` — default "node_modules"
+#   `modulesDirAliases`
+#   `binDir`     — default "node_modules/.bin"
+#
+# If you want Node-flavoured resolution (which a TS monorepo usually does):
+
+moduleResolution = "bundler"
+
+# ==============================================================================
+# Test
+# ==============================================================================
+
+# ── FIX 9: `[test]` belongs under `[test]`, but coverage is a *test run*
+#    option, not a bunfig.toml directive for `bun test` defaults. The
+#    supported `[test]` table in bunfig.toml is:
+#      preload, root, coverage, coverageThreshold, coverageSkipTestFiles,
+#      coverageReporter, coveragePathIgnorePatterns, coveragePathIgnorePatterns,
+#      testNamePattern, timeout, ...
+#    Your four keys are valid — keep them. But note `coverage = true` here
+#    means *every* `bun test` invocation in the repo computes coverage, which
+#    is slow. Consider moving it to a CI-only flag: `bun test --coverage`.
+[test]
+coverage = false # was `true` — see note above
+coverageReporter = ["text", "lcov"]
+coverageSkipTestFiles = true
+
+# ==============================================================================
+# Optional: the overrides you *probably* meant
+# ==============================================================================
+#
+# If you were trying to pin TypeScript across the monorepo, this is the
+# correct bunfig.toml syntax:
+#
+# [overrides]
+# "typescript" = "npm:typescript@5.9.3"
+#
+# And if you wanted to expose TS 6 under a non-conflicting name:
+#
+# [overrides]
+# "typescript" = "npm:typescript@5.9.3"
+#
+# There is no `[install.scopes]` mechanism for renaming a package to another
+# package. That is `[overrides]`.

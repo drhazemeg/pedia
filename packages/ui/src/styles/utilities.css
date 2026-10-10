@@ -1,0 +1,16 @@
+/* ============================================================================
+   UTILITIES — Tailwind overrides + focus ring
+   ============================================================================ */
+
+@layer utilities {
+  /* Smooth scroll */
+  .smooth-scroll {
+    scroll-behavior: smooth;
+  }
+
+  /* Focus ring */
+  *:focus-visible {
+    outline: 2px solid var(--color-brand-accent);
+    outline-offset: 2px;
+  }
+}

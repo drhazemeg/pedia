@@ -32,8 +32,9 @@ export async function POST(request: Request) {
 **Correct (non-blocking):**
 
 ```tsx
-import { after } from "next/server";
 import { headers, cookies } from "next/headers";
+import { after } from "next/server";
+
 import { logUserAction } from "@/app/utils";
 
 export async function POST(request: Request) {
@@ -43,7 +44,8 @@ export async function POST(request: Request) {
   // Log after response is sent
   after(async () => {
     const userAgent = (await headers()).get("user-agent") || "unknown";
-    const sessionCookie = (await cookies()).get("session-id")?.value || "anonymous";
+    const sessionCookie =
+      (await cookies()).get("session-id")?.value || "anonymous";
 
     logUserAction({ sessionCookie, userAgent });
   });

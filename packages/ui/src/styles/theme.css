@@ -1,0 +1,388 @@
+:root {
+  /* ==================================================================
+     BASE NEUTRALS — cool blue-tinted, tuned for a soft baby-blue brand.
+     Hue 230, low chroma so surfaces stay neutral but hint at the brand.
+     ================================================================== */
+  --base-50: oklch(0.988 0.006 230);
+  --base-100: oklch(0.968 0.012 230);
+  --base-200: oklch(0.925 0.018 230);
+  --base-300: oklch(0.868 0.024 230);
+  --base-400: oklch(0.708 0.03 230);
+  --base-500: oklch(0.552 0.034 230);
+  --base-600: oklch(0.44 0.032 230);
+  --base-700: oklch(0.362 0.028 230);
+  --base-800: oklch(0.258 0.022 230);
+  --base-900: oklch(0.188 0.016 230);
+  --base-950: oklch(0.138 0.012 230);
+  --base-1000: oklch(0.092 0.009 230);
+
+  /* ==================================================================
+     BRAND — Baby Blue Pediatric
+     Primary is a friendly, saturated baby blue (hue ~245 in OKLCH terms).
+     Secondary accent is a warm apricot, used for highlights, charts,
+     hover states, and anything that should feel "warm" without being
+     an error/warning color.
+     ================================================================== */
+  --color-brand-primary: #4a9fd8;
+  --color-brand-primary-soft: #7bbde8;
+  --color-brand-primary-deep: #2f7db5;
+  --color-brand-accent: #f4b17a; /* warm apricot */
+  --color-brand-accent-soft: #f8cba3;
+  --color-brand-success: #58b894;
+  --color-brand-surface: #eaf5fc; /* very soft blue surface */
+  --color-brand-foam: #f4faff; /* almost-white blue tint */
+
+  /* ==================================================================
+     SURFACES
+     ================================================================== */
+  --surface: rgba(255, 255, 255, 0.82);
+  --surface-strong: rgba(255, 255, 255, 0.95);
+  --surface-hover: rgba(234, 245, 252, 0.96);
+
+  /* ==================================================================
+     UI ELEMENTS — lines/glints use primary hue so elevation reads brand-tinted
+     ================================================================== */
+  --line: rgba(74, 159, 216, 0.14);
+  --line-strong: rgba(74, 159, 216, 0.26);
+  --inset-glint: rgba(255, 255, 255, 0.88);
+  --kicker: rgba(47, 125, 181, 0.92);
+  --bg-base: #eaf5fc;
+  --header-bg: rgba(244, 250, 255, 0.86);
+  --header-bg-blur: rgba(244, 250, 255, 0.96);
+
+  /* ==================================================================
+     INTERACTIVE
+     ================================================================== */
+  --chip-bg: rgba(255, 255, 255, 0.86);
+  --chip-line: rgba(74, 159, 216, 0.18);
+  --link-bg-hover: rgba(234, 245, 252, 0.9);
+
+  /* ==================================================================
+     GRADIENTS
+     ================================================================== */
+  --hero-a: rgba(123, 189, 232, 0.32);
+  --hero-b: rgba(244, 177, 122, 0.14);
+
+  /* ==================================================================
+     SHADOWS — tinted with primary hue, not gray
+     ================================================================== */
+  --shadow-sm: 0 1px 2px rgba(47, 125, 181, 0.06);
+  --shadow-md: 0 4px 14px rgba(47, 125, 181, 0.1);
+  --shadow-lg: 0 8px 30px rgba(47, 125, 181, 0.14);
+  --shadow-xl: 0 18px 44px rgba(47, 125, 181, 0.17);
+
+  /* ==================================================================
+     SHADCN TOKENS — single source of truth
+     ================================================================== */
+  --background: var(--base-50);
+  --foreground: var(--base-800);
+
+  --card: oklch(1 0 0);
+  --card-foreground: var(--base-800);
+
+  --popover: oklch(1 0 0);
+  --popover-foreground: var(--base-800);
+
+  --primary: #4a9fd8;
+  --primary-foreground: #ffffff;
+
+  --secondary: var(--base-100);
+  --secondary-foreground: var(--base-800);
+
+  --muted: var(--base-100);
+  --muted-foreground: var(--base-600);
+
+  --accent: #fdf2e8; /* warm apricot tint */
+  --accent-foreground: #8a4a1a; /* deep brown-orange for legibility */
+
+  --border: var(--base-200);
+  --input: var(--base-300);
+  --ring: #7bbde8; /* soft focus ring — never harsh */
+
+  --radius: 0.75rem; /* ↑ from 0.625 — friendlier corners */
+
+  /* ==================================================================
+     FEEDBACK / STATUS
+     ================================================================== */
+  --destructive: oklch(0.62 0.22 25);
+  --destructive-foreground: oklch(0.99 0 0);
+  --warning: oklch(0.82 0.16 75);
+  --warning-foreground: oklch(0.25 0.04 60);
+  --success: oklch(0.68 0.14 155);
+  --success-foreground: oklch(0.99 0 0);
+  --info: oklch(0.66 0.14 240);
+  --info-foreground: oklch(0.99 0 0);
+
+  /* ==================================================================
+     CHARTS — baby blue + warm secondary + green/yellow/coral
+     ================================================================== */
+  --chart-1: #4a9fd8; /* baby blue — primary */
+  --chart-2: #f4b17a; /* apricot */
+  --chart-3: #58b894; /* mint green */
+  --chart-4: #f7c948; /* soft yellow */
+  --chart-5: #e57373; /* coral */
+
+  /* ==================================================================
+     MODULE ACCENTS — pediatric-friendly, matched lightness
+     ================================================================== */
+  --module-patients: oklch(0.62 0.14 245); /* sky blue */
+  --module-encounters: oklch(0.68 0.14 155); /* mint */
+  --module-growth: oklch(0.68 0.12 300); /* lavender */
+  --module-immunizations: oklch(0.76 0.13 75); /* soft amber */
+  --module-prescriptions: oklch(0.66 0.16 25); /* coral */
+  --module-labs: oklch(0.62 0.13 265); /* periwinkle */
+
+  /* ==================================================================
+     SIDEBAR
+     ================================================================== */
+  --sidebar: var(--base-100);
+  --sidebar-foreground: var(--base-800);
+  --sidebar-primary: #4a9fd8;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: var(--base-200);
+  --sidebar-accent-foreground: var(--base-800);
+  --sidebar-border: var(--base-200);
+  --sidebar-ring: #7bbde8;
+
+  /* ==================================================================
+     SCROLLBAR
+     ================================================================== */
+  --scrollbar-width: 6px;
+  --scrollbar-bg: var(--base-100);
+  --scrollbar-thumb: #7bbde8;
+
+  /* ==================================================================
+     LAYOUT
+     ================================================================== */
+  --navbar-height: 68px;
+
+  color-scheme: light;
+}
+
+/* ============================
+   DARK THEME
+   ============================ */
+
+.dark {
+  /* Base scale stays shared — do not redeclare */
+
+  /* ==================================================================
+     BRAND — softer, lighter for dark surfaces
+     ================================================================== */
+  --color-brand-primary: #a6d4f0;
+  --color-brand-primary-soft: #7bbde8;
+  --color-brand-primary-deep: #c9e6f8;
+  --color-brand-accent: #f4b17a;
+  --color-brand-accent-soft: #f8cba3;
+  --color-brand-success: #6cd0ac;
+  --color-brand-surface: #0c2233;
+  --color-brand-foam: #08192a;
+
+  /* ==================================================================
+     SURFACES
+     ================================================================== */
+  --surface: rgba(8, 25, 42, 0.84);
+  --surface-strong: rgba(7, 22, 38, 0.95);
+  --surface-hover: rgba(14, 36, 58, 0.86);
+
+  /* ==================================================================
+     UI ELEMENTS
+     ================================================================== */
+  --line: rgba(123, 189, 232, 0.18);
+  --line-strong: rgba(123, 189, 232, 0.32);
+  --inset-glint: rgba(166, 212, 240, 0.12);
+  --kicker: #c9e6f8;
+  --bg-base: #08192a;
+  --header-bg: rgba(8, 25, 42, 0.84);
+  --header-bg-blur: rgba(8, 25, 42, 0.96);
+
+  /* ==================================================================
+     INTERACTIVE
+     ================================================================== */
+  --chip-bg: rgba(12, 34, 51, 0.92);
+  --chip-line: rgba(123, 189, 232, 0.24);
+  --link-bg-hover: rgba(14, 36, 58, 0.86);
+
+  /* ==================================================================
+     GRADIENTS
+     ================================================================== */
+  --hero-a: rgba(123, 189, 232, 0.18);
+  --hero-b: rgba(244, 177, 122, 0.1);
+
+  /* ==================================================================
+     SHADOWS
+     ================================================================== */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.24);
+  --shadow-md: 0 4px 14px rgba(0, 0, 0, 0.36);
+  --shadow-lg: 0 8px 30px rgba(0, 0, 0, 0.46);
+  --shadow-xl: 0 18px 44px rgba(0, 0, 0, 0.56);
+
+  /* ==================================================================
+     SHADCN TOKENS
+     ================================================================== */
+  --background: var(--base-950);
+  --foreground: var(--base-200);
+
+  --card: var(--base-950);
+  --card-foreground: var(--base-200);
+
+  --popover: var(--base-950);
+  --popover-foreground: var(--base-200);
+
+  --primary: #7bbde8;
+  --primary-foreground: #08192a;
+
+  --secondary: var(--base-800);
+  --secondary-foreground: var(--base-200);
+
+  --muted: var(--base-800);
+  --muted-foreground: var(--base-400);
+
+  --accent: #2c1e14; /* dark warm tint */
+  --accent-foreground: #f4b17a;
+
+  --border: var(--base-800);
+  --input: var(--base-700);
+  --ring: #7bbde8;
+
+  /* ==================================================================
+     FEEDBACK / STATUS
+     ================================================================== */
+  --destructive: oklch(0.72 0.19 22);
+  --destructive-foreground: var(--base-50);
+  --warning: oklch(0.78 0.15 75);
+  --warning-foreground: var(--base-950);
+  --success: oklch(0.72 0.14 155);
+  --success-foreground: var(--base-950);
+  --info: oklch(0.72 0.13 240);
+  --info-foreground: var(--base-950);
+
+  /* ==================================================================
+     CHARTS — lifted lightness for dark surfaces
+     ================================================================== */
+  --chart-1: #7bbde8;
+  --chart-2: #f4b17a;
+  --chart-3: #6cd0ac;
+  --chart-4: #f7c948;
+  --chart-5: #e57373;
+
+  /* ==================================================================
+     MODULE ACCENTS — lifted lightness
+     ================================================================== */
+  --module-patients: oklch(0.74 0.11 245);
+  --module-encounters: oklch(0.78 0.11 155);
+  --module-growth: oklch(0.78 0.1 300);
+  --module-immunizations: oklch(0.82 0.11 75);
+  --module-prescriptions: oklch(0.76 0.13 25);
+  --module-labs: oklch(0.74 0.11 265);
+
+  /* ==================================================================
+     SIDEBAR
+     ================================================================== */
+  --sidebar: var(--base-900);
+  --sidebar-foreground: var(--base-200);
+  --sidebar-primary: #7bbde8;
+  --sidebar-primary-foreground: #08192a;
+  --sidebar-accent: var(--base-800);
+  --sidebar-accent-foreground: var(--base-200);
+  --sidebar-border: var(--base-800);
+  --sidebar-ring: #7bbde8;
+
+  /* ==================================================================
+     SCROLLBAR
+     ================================================================== */
+  --scrollbar-bg: var(--base-800);
+  --scrollbar-thumb: #7bbde8;
+
+  color-scheme: dark;
+}
+
+/* ============================
+   TAILWIND THEME MAPPINGS
+   ============================ */
+
+@theme inline {
+  /* Base colors */
+  --color-base-50: var(--base-50);
+  --color-base-100: var(--base-100);
+  --color-base-200: var(--base-200);
+  --color-base-300: var(--base-300);
+  --color-base-400: var(--base-400);
+  --color-base-500: var(--base-500);
+  --color-base-600: var(--base-600);
+  --color-base-700: var(--base-700);
+  --color-base-800: var(--base-800);
+  --color-base-900: var(--base-900);
+  --color-base-950: var(--base-950);
+  --color-base-1000: var(--base-1000);
+
+  /* Brand */
+  --color-brand-primary: var(--color-brand-primary);
+  --color-brand-primary-soft: var(--color-brand-primary-soft);
+  --color-brand-primary-deep: var(--color-brand-primary-deep);
+  --color-brand-accent: var(--color-brand-accent);
+  --color-brand-accent-soft: var(--color-brand-accent-soft);
+  --color-brand-success: var(--color-brand-success);
+  --color-brand-surface: var(--color-brand-surface);
+  --color-brand-foam: var(--color-brand-foam);
+
+  /* Shadcn */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  /* Feedback / status */
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-info: var(--info);
+  --color-info-foreground: var(--info-foreground);
+
+  /* Charts */
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+
+  /* Module accents */
+  --color-module-patients: var(--module-patients);
+  --color-module-encounters: var(--module-encounters);
+  --color-module-growth: var(--module-growth);
+  --color-module-immunizations: var(--module-immunizations);
+  --color-module-prescriptions: var(--module-prescriptions);
+  --color-module-labs: var(--module-labs);
+
+  /* Sidebar */
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  /* Radius scale */
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
