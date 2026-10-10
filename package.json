@@ -1,0 +1,62 @@
+{
+  "name": "pedia",
+  "private": true,
+  "workspaces": {
+    "packages": [
+      "apps/*",
+      "packages/*"
+    ],
+    "catalog": {
+      "zod": "^4.5.4",
+      "typescript": "^6.0.3",
+      "@types/bun": "^1.4.2",
+      "varlock": "1.18.0",
+      "@orpc/server": "^1.15.0",
+      "@orpc/openapi": "^1.15.0",
+      "@orpc/zod": "^1.15.0",
+      "better-auth": "1.7.7",
+      "lucide-react": "^1.41.0",
+      "next-themes": "^0.4.6",
+      "react": "^19.2.8",
+      "react-dom": "^19.2.8",
+      "sonner": "^2.0.8",
+      "tailwindcss": "^4.3.3",
+      "@orpc/client": "^1.15.0",
+      "@types/react": "^19.2.18",
+      "@types/react-dom": "^19.2.7",
+      "drizzle-orm": "1.0.0-rc.4"
+    }
+  },
+  "type": "module",
+  "scripts": {
+    "dev": "turbo run dev",
+    "build": "turbo run build",
+    "check-types": "turbo run check-types",
+    "dev:web": "turbo run dev -F web --",
+    "dev:server": "turbo run dev -F server --",
+    "db:push": "turbo run db:push -F @pedia/db --",
+    "db:studio": "turbo run db:studio -F @pedia/db --",
+    "db:generate": "turbo run db:generate -F @pedia/db --",
+    "db:migrate": "turbo run db:migrate -F @pedia/db --",
+    "env:generate": "varlock codegen --path ./apps/web/ && varlock codegen --path ./apps/server/ && varlock codegen --path ./packages/db/",
+    "postinstall": "varlock codegen --path ./apps/web/ && varlock codegen --path ./apps/server/ && varlock codegen --path ./packages/db/",
+    "auth:generate": "cd apps/server && bun run auth:generate",
+    "check": "ultracite check",
+    "fix": "ultracite fix"
+  },
+  "dependencies": {
+    "zod": "catalog:"
+  },
+  "devDependencies": {
+    "@pedia/config": "workspace:*",
+    "@types/bun": "catalog:",
+    "lefthook": "latest",
+    "oxfmt": "latest",
+    "oxlint": "latest",
+    "turbo": "^2.10.12",
+    "typescript": "catalog:",
+    "ultracite": "7.11.0",
+    "varlock": "catalog:"
+  },
+  "packageManager": "bun@1.4.2"
+}
